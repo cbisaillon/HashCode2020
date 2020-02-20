@@ -30,9 +30,9 @@ while True:
 
     print("Current time: %s\n" % datetime.now().strftime("%H:%M:%S"))
 
-    if datetime.now() > STARTING_TIME:
+    if datetime.now() > STARTING_TIME and False:
         print("Competition Not Yet Started. %d Second(s) To Go." % ((STARTING_TIME - datetime.now()).seconds))
-    elif datetime.now() < END_TIME:
+    elif datetime.now() < END_TIME and False:
         print("Competition Ended %d Second(s) Ago." % ((datetime.now() - STARTING_TIME).seconds))
     else:
         print("Schedule\n----------\n")
