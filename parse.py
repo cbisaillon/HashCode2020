@@ -9,7 +9,7 @@ import warnings
 
 # Load Question
 
-def loadQuestion(file_name: str, parameters) -> Question:
+def loadQuestion(file_name: str) -> Question:
     with open(file_name, 'r') as h:
         (num_books, num_libraries, scan_day) = [int(x) for x in h.readline().split(' ')]
         books = [int(x) for x in h.readline().split(' ')]
@@ -20,17 +20,17 @@ def loadQuestion(file_name: str, parameters) -> Question:
             lib_books = [int(x) for x in h.readline().split(' ')]
             libraries.append((ship_rate, signup, lib_books))
 
-    return Question(parameters=parameters, file_name=file_name, days_to_scan=scan_day, book_scores=books, libraries=libraries)
+    return Question(file_name=file_name, days_to_scan=scan_day, book_scores=books, libraries=libraries)
 
-def loadQuestions(file_names: [str] = [], parameters = []) -> [Question]:
+def loadQuestions(file_names: [str] = []) -> [Question]:
     questions = []
 
     if len(file_names) > 0:
         for f in file_names:
-            questions.append(loadQuestion(f, parameters))
+            questions.append(loadQuestion(f))
     else:
         for f in glob(QUESTION_FOLDER + '*.*'):
-            questions.append(loadQuestion(f, parameters))
+            questions.append(loadQuestion(f))
 
     return questions
 

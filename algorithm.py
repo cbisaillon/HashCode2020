@@ -8,12 +8,12 @@ import scipy
 
 from classes import Question, Solution
 
-def solve(question: Question) -> Solution:
+def solve(question: Question, parameters) -> Solution:
 
     # Sort the libraries by their score
     libraries = question.libraries
 
-    libraries.sort()
+    libraries = sorted(libraries, key=lambda x: x.getScore(paramers))
     totalDays = 0
 
     librariesOut = []
@@ -37,10 +37,10 @@ def solve(question: Question) -> Solution:
 
     return Solution(file_name=question.file_name, libraries=librariesOut, books_from_libary=booksOut)
 
-def solveAll(questions: [Question]) -> [Solution]:
+def solveAll(questions: [Question], parameters) -> [Solution]:
     solutions = []
     
     for question in questions:
-        solutions.append(solve(question))
+        solutions.append(solve(question, parameters))
     
     return solutions

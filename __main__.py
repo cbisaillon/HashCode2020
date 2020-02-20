@@ -2,6 +2,7 @@
 
 from utils.pack import packSolution
 from parse import loadQuestions, saveSolutions, handleArgv
+from classes import Question, Solution
 from algorithm import solveAll
 from score import getScores, getTotalScore
 import os
@@ -14,20 +15,12 @@ from datetime import datetime
 
 from scipy import optimize
 
-def getOptimizeScore(x, *args) -> float:
-    print(args)
-    return main(x)
+arguments = handleArgv()
 
-def callback(xk, state) -> bool:
-    print(state)
-    return True
-
-def main(parameters) -> float:
+def getQuestions() -> [Question]:
     start = datetime.now()
 
     print("Hash Code 2020")
-
-    arguments = handleArgv()
 
     print("\nShell Args:")
 
@@ -37,12 +30,24 @@ def main(parameters) -> float:
     if arguments.usesQuestionSample:
         questions = loadQuestionSamples()
     else:
-        questions = loadQuestions(arguments.files, parameters)
+        questions = loadQuestions(arguments.files)
 
     if not arguments.silentMode:
         for question in questions:
             print(question)
 
+questions = getQuestions()
+
+def getOptimizeScore(x, *args) -> float:
+    return -optimize(x)
+
+def optimize(parameters) -> float:
+    solutions = solveAll(questions, parameters)
+    scores = getScores(solutions)
+
+    return getTotalScore(scores)
+
+def main(parameters) -> float:
     print("\nSolve Questions:")
     if arguments.usesSolutionSample:
         solutions = solveAll(loadSolutionSamples())
@@ -52,9 +57,6 @@ def main(parameters) -> float:
     if not arguments.silentMode:
         for solution in solutions:
             print(solution)
-
-    print("\nSave Solutions:")
-    saveSolutions(solutions)
 
     print("\nEvaluate Solutions:")
     scores: [Score] = getScores(solutions)
@@ -66,6 +68,9 @@ def main(parameters) -> float:
 
     print("Total Score: %d" % totalScore)
     print("Execution Time: %s" % (datetime.now() - start))
+
+    print("\nSave Solutions:")
+    saveSolutions(solutions)
 
     print("\nPack Source:")
     packSolution()
@@ -81,4 +86,4 @@ if __name__ == '__main__':
     b = (0.000001, 10.0)
     bnds = (b, b, b)
 
-    optimize.minimize(fun=getOptimizeScore, x0=[1.0, 1.0, 1.0], method="SLSQP", tol=10000, bounds = bnds, callback=callback)
+    optimize.minimize(fun=getOptimizeScore, x0=[1.0, 1.0, 1.0], method="POWELL", tol=10000, bounds = bnds)

@@ -12,16 +12,12 @@ class Book:
     def __str__(self):
         return "Book %d Score %d" % (self.id, self.score)
 
-
-MAX_SCORE = 50000000
-
 @total_ordering
 class Library:
-    def __init__(self, id: int, book_per_day: int, signup_time: int,  books: [Book], parameters):
+    def __init__(self, id: int, book_per_day: int, signup_time: int,  books: [Book]):
         self.id = id
         self.books_per_day = book_per_day
         self.signup_time = signup_time
-        self.parameters = parameters
         self.books = books
 
     def sumOfAllBooks(self):
@@ -31,13 +27,10 @@ class Library:
 
         return total
 
-    def getScore(self):
-        (a,b,c) = self.parameters
+    def getScore(self, parameters):
+        (a,b,c) = parameters
 
         return (a * self.books_per_day + b * self.sumOfAllBooks()) / c * self.signup_time
-
-    def getError(self):
-        return MAX_SCORE - self.getScore()
         
     def __eq__(self, other):
         return self.getScore() == other.getScore()
@@ -49,11 +42,11 @@ class Library:
         return "Library -> Id: %d, Per Day: %d, Singup: %d, Books %s" % (self.id, self.books_per_day, self.signup_time, [str(x) for x in self.books])
 
 class Question:
-    def __init__(self, file_name: str = '', days_to_scan: int = 0, book_scores: [int] = [], libraries =[], parameters = []):
+    def __init__(self, file_name: str = '', days_to_scan: int = 0, book_scores: [int] = [], libraries =[]):
         self.file_name = file_name
         self.days_to_scan = days_to_scan
         self.books = [Book(id=i, score=x) for i, x in enumerate(book_scores)]
-        self.libraries = [Library(id=k, book_per_day=books_per_day, parameters=parameters, signup_time=signup_time, books=[self.books[i] for i in book_ids]) for (k, (books_per_day, signup_time, book_ids)) in enumerate(libraries)]
+        self.libraries = [Library(id=k, book_per_day=books_per_day, signup_time=signup_time, books=[self.books[i] for i in book_ids]) for (k, (books_per_day, signup_time, book_ids)) in enumerate(libraries)]
 
     def __str__(self):
         return "Question (%s) -> Day to Scan: %d, Books: %s, Libraries: %s" % (self.file_name, self.days_to_scan, [str(x) for x in self.books], [str(x) for x in self.libraries])
