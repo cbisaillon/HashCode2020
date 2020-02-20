@@ -21,3 +21,7 @@ For security reasons, `secret.py` is not in the git repo. Here is the template:
 ```python
 SUBMISSION_URL = ''
 ```
+
+# time_manager.py 
+
+A simple script to keep track of the competition sprints. You'll hear a beep when sprint changed. Recomended that the script should be run in a seperate window.
