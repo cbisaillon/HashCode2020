@@ -2,19 +2,19 @@
 
 This is the repository for team `<b>No BOLD</b>`.
 
-# Setup
+## Setup
 
 To get the code running, make a `hashcode2020` virtual python environment. Do `conda active hashcode2020` to get the environment running. Do `pip install -r requirements.txt` to install the python requirements. If you install new dependencies, don't forget to do `pip freeze > requirements.txt`.
 
-# Usage
+## Usage
 
 Use the `hashcode2020` virtual environment. The default setting 
 
-# Solution
+## Solution
 
 The code automatically generates the solution in the desired format. All the files required can be found in the `solution` folder.
 
-# secret.py
+## secret.py
 
 For security reasons, `secret.py` is not in the git repo. Here is the template:
 
@@ -22,6 +22,6 @@ For security reasons, `secret.py` is not in the git repo. Here is the template:
 SUBMISSION_URL = ''
 ```
 
-# time_manager.py 
+## time_manager.py 
 
 A simple script to keep track of the competition sprints. You'll hear a beep when sprint changed. Recomended that the script should be run in a seperate window.
