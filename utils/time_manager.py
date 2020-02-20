@@ -5,7 +5,6 @@ from datetime import datetime
 from constants import STARTING_TIME, END_TIME, SCHEDULE
 import time
 import winsound
-import webbrowser
 
 # Verifies If Time Schedule Long Enough
 
@@ -46,7 +45,6 @@ while True:
 
             if not new_event and current_minute == rolling_sum:
                 new_event = True
-                webbrowser.open('')
                 for _ in range(5):
                     winsound.Beep(2000, 200)
             elif current_minute == rolling_sum + duration:

@@ -1,7 +1,7 @@
 # Main File (LIGHT MODIFICATIONS)
 
 from utils.pack import packSolution
-from parse import loadQuestions, saveSolutions, handleArgv, loadSamples
+from parse import loadQuestions, saveSolutions, handleArgv
 from algorithm import solveAll
 from score import getScores
 import os
@@ -9,19 +9,23 @@ from utils.constants import SOLUTION_FOLDER
 from utils.secret import SUBMISSION_URL
 import webbrowser
 import subprocess
+from sample import loadQuestionSamples, loadSolutionSamples
+from datetime import datetime
 
 def main():
-    arguments = handleArgv()
+    start = datetime.now()
 
     print("Hash Code 2020")
+
+    arguments = handleArgv()
 
     print("\nShell Args:")
 
     print(arguments)
 
     print("\nLoad Questions:")
-    if arguments.usesSample:
-        questions = loadQuestions(loadSamples())
+    if arguments.usesQuestionSample:
+        questions = loadQuestions(loadQuestionSamples())
     else:
         questions = loadQuestions(arguments.files)
 
@@ -29,7 +33,10 @@ def main():
         print(question)
 
     print("\nSolve Questions:")
-    solutions = solveAll(questions)
+    if arguments.usesSolutionSample:
+        solutions = solveAll(loadSolutionSamples())
+    else:
+        solutions = solveAll(questions)
 
     for solution in solutions:
         print(solution)
@@ -47,6 +54,7 @@ def main():
         totalScore += score.val
 
     print("Total Score: %f" % totalScore)
+    print("Execution Time: %s" % (datetime.now() - start))
 
     print("\nPack Source:")
     packSolution()

@@ -3,7 +3,7 @@
 import warnings
 
 class Question:
-    def __init__(self, file_name: str = "null.txt"):
+    def __init__(self, file_name: str):
         self.file_name = file_name
         warnings.warn("TODO QUESTION CLASS")
 
@@ -11,8 +11,8 @@ class Question:
         return "Question: %s" % (self.file_name)
 
 class Solution:
-    def __init__(self, question: Question):
-        self.file_name = question.file_name
+    def __init__(self, file_name: str):
+        self.file_name = file_name
         warnings.warn("TODO SOLUTION CLASS")
     
     def __str__(self):
@@ -31,7 +31,8 @@ class Arguments:
     def __init__(self):
         self.files = []
         self.hasPopup = False
-        self.usesSample = False
+        self.usesQuestionSample = False
+        self.usesSolutionSample = False
 
     def __str__(self):
-        return "Arguments has files %s, popup %s, sample %s." % (self.files, self.hasPopup, self.usesSample)
+        return "Arguments has files %s, popup %s, question sample %s, solution sample %s." % (self.files, self.hasPopup, self.usesQuestionSample, self.usesSolutionSample)
