@@ -1,7 +1,7 @@
 # Main File (LIGHT MODIFICATIONS)
 
 from utils.pack import packSolution
-from parse import loadQuestions, saveSolutions, handleArgv
+from parse import loadQuestions, saveSolutions, handleArgv, loadSamples
 from algorithm import solveAll
 from score import getScores
 import os
@@ -20,7 +20,10 @@ def main():
     print(arguments)
 
     print("\nLoad Questions:")
-    questions = loadQuestions(arguments.files)
+    if arguments.usesSample:
+        questions = loadQuestions(loadSamples())
+    else:
+        questions = loadQuestions(arguments.files)
 
     for question in questions:
         print(question)

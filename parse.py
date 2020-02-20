@@ -24,6 +24,9 @@ def loadQuestions(file_names: [str] = []) -> [Question]:
 
     return questions
 
+def loadSamples() -> [Question]:
+    return [Question("sample")]
+
 # Save Question
 
 def saveSolution(solution: Solution):
@@ -41,10 +44,13 @@ def handleArgv() -> Arguments:
     for arg in sys.argv[1:]:
         if arg == '-p':
             arguments.hasPopup = True
+        elif arg == '-s':
+            arguments.usesSample = True
         elif arg == '-h':
-            print('Usage: python . [-h] [-n] [[file_name_1] [file_name_2] ...]')
+            print('Usage: python . [-h] [-n] [-s] [[file_name_1] [file_name_2] ...]')
             print('-h: Help and usage.')
             print('-p: Activates the automatic popup for submission.')
+            print('-s: Uses temporary sample question.')
             print('file_name_n: File name to find a solution (by default, runs all files in QUESTION_FOLDER).')
             exit(0)
         else:
