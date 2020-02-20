@@ -2,12 +2,19 @@
 
 This is the repository for team `<b>No BOLD</b>`.
 Our final results:
+
 A: 21
+
 B: 5 822 900
+
 C: 5 643 156
+
 D: 4 815 395
+
 E: 3 714 416
+
 F: 5 227 905
+
 
 ## Setup
 
