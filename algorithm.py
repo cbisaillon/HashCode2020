@@ -4,6 +4,8 @@ import warnings
 from data_structures import *
 from classes import Library
 
+import scipy
+
 from classes import Question, Solution
 
 def solve(question: Question) -> Solution:
@@ -13,6 +15,8 @@ def solve(question: Question) -> Solution:
 
     libraries.sort()
     totalDays = 0
+
+    scipy.optimize.leastsq()
 
     librariesOut = []
     booksOut = []
