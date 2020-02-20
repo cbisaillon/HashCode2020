@@ -34,7 +34,7 @@ class Library:
     def getScore(self):
         (a,b,c) = self.parameters
 
-        return (a * self.books_per_day + b * self.sumOfAllBooks()) / c * self.signup_time
+        return (a * self.books_per_day + b * self.sumOfAllBooks()) / (c * self.signup_time)
 
     def getError(self):
         return MAX_SCORE - self.getScore()
