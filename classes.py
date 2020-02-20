@@ -30,7 +30,14 @@ class Library:
     def getScore(self, parameters):
         (a,b,c) = parameters
 
+<<<<<<< HEAD
         return (a * self.books_per_day + b * self.sumOfAllBooks()) / c * self.signup_time
+=======
+        return (a * self.books_per_day + b * self.sumOfAllBooks()) / (c * self.signup_time)
+
+    def getError(self):
+        return MAX_SCORE - self.getScore()
+>>>>>>> 540031c3217d7f563ed78c750dfe054ad83297a1
         
     def __eq__(self, other):
         return self.getScore() == other.getScore()

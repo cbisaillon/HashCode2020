@@ -83,7 +83,17 @@ def main(parameters) -> float:
     return totalScore
 
 if __name__ == '__main__':
-    b = (0.000001, 10.0)
+    b = (0.5, 10.0)
     bnds = (b, b, b)
 
-    optimize.minimize(fun=getOptimizeScore, x0=[1.0, 1.0, 1.0], method="POWELL", tol=10000, bounds = bnds)
+    a= optimize.minimize(fun=getOptimizeScore,
+                         x0=[1.55472633e-8, 3.58792896, 3.58792896],
+                         method="Powell",
+                         bounds = bnds,
+                         options = {
+                             "maxiter": 500,
+                             "disp": True
+                         })
+
+    print(a.fun)
+    print(a.x)
