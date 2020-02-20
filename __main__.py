@@ -81,4 +81,4 @@ if __name__ == '__main__':
     b = (0.000001, 10.0)
     bnds = (b, b, b)
 
-    print(optimize.minimize(fun=getOptimizeScore, x0=[1.0, 1.0, 1.0], method="SLSQP", tol=10000, bounds = bnds, callback=callback))
+    optimize.minimize(fun=getOptimizeScore, x0=[1.0, 1.0, 1.0], method="SLSQP", tol=10000, bounds = bnds, callback=callback)

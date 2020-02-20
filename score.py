@@ -10,7 +10,10 @@ def getScore(solution: Solution) -> Score:
     score = 0
 
     for _, books in solution.library_books:
-        score += sum([x.score for x in books])
+        for book in books:
+            if not book in books_seen:
+                score += book.score
+                books_seen.add(book)
 
     return Score(score, solution)
 
