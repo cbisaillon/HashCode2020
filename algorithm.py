@@ -13,7 +13,7 @@ def solve(question: Question, parameters) -> Solution:
     # Sort the libraries by their score
     libraries = question.libraries
 
-    libraries = sorted(libraries, key=lambda x: x.getScore(paramers))
+    libraries = sorted(libraries, key=lambda x: x.getScore(parameters))
     totalDays = 0
 
     librariesOut = []
@@ -39,6 +39,8 @@ def solve(question: Question, parameters) -> Solution:
 
 def solveAll(questions: [Question], parameters) -> [Solution]:
     solutions = []
+
+    print(parameters)
     
     for question in questions:
         solutions.append(solve(question, parameters))

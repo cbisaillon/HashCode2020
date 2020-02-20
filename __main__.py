@@ -36,18 +36,25 @@ def getQuestions() -> [Question]:
         for question in questions:
             print(question)
 
-questions = getQuestions()
+    return questions
 
 def getOptimizeScore(x, *args) -> float:
-    return -optimize(x)
+    return -optimizeFunc(args[0], x)
 
-def optimize(parameters) -> float:
+def optimizeFunc(questions, parameters) -> float:
     solutions = solveAll(questions, parameters)
     scores = getScores(solutions)
+    saveSolutions(solutions)
 
-    return getTotalScore(scores)
+    total = getTotalScore(scores)
+
+    print(total)
+
+    return total
 
 def main(parameters) -> float:
+    questions = getQuestions()
+
     print("\nSolve Questions:")
     if arguments.usesSolutionSample:
         solutions = solveAll(loadSolutionSamples())
@@ -86,6 +93,8 @@ if __name__ == '__main__':
     b = (0.5, 10.0)
     bnds = (b, b, b)
 
+    questions = getQuestions()
+
     a= optimize.minimize(fun=getOptimizeScore,
                          x0=[1.55472633e-8, 3.58792896, 3.58792896],
                          method="Powell",
@@ -93,7 +102,4 @@ if __name__ == '__main__':
                          options = {
                              "maxiter": 500,
                              "disp": True
-                         })
-
-    print(a.fun)
-    print(a.x)
+                         }, args=(questions))
