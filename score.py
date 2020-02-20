@@ -6,7 +6,7 @@ from glob import glob
 import warnings
 
 def getScore(solution: Solution) -> Score:
-    warnings.warn("TODO GET SCORE %s" % solution)
+    warnings.warn("TODO GET SCORE")
     return Score(0, solution)
 
 def getScores(solutions: [Solution]) -> [Score]:

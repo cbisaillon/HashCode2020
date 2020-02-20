@@ -71,6 +71,7 @@ class Arguments:
         self.hasPopup = False
         self.usesQuestionSample = False
         self.usesSolutionSample = False
+        self.silentMode = False
 
     def __str__(self):
         return "Arguments has files %s, popup %s, question sample %s, solution sample %s." % (self.files, self.hasPopup, self.usesQuestionSample, self.usesSolutionSample)

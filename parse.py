@@ -4,6 +4,7 @@ from utils.constants import QUESTION_FOLDER, SOLUTION_FOLDER
 from glob import glob
 from classes import Question, Solution, Arguments, Library, Book
 import sys
+import os
 import warnings
 
 # Load Question
@@ -36,7 +37,7 @@ def loadQuestions(file_names: [str] = []) -> [Question]:
 # Save Question
 
 def saveSolution(solution: Solution):
-    file = open(SOLUTION_FOLDER + solution.file_name.split('/')[-1] + '.solve', 'w')
+    file = open(SOLUTION_FOLDER + os.path.basename(solution.file_name) + '.solve', 'w')
     nbLibraries = len(solution.library_books)
 
     file.write("{}\n".format(nbLibraries))
@@ -64,12 +65,15 @@ def handleArgv() -> Arguments:
             arguments.usesQuestionSample = True
         elif arg == '-ss':
             arguments.usesSolutionSample = True
+        elif arg == '-z':
+            arguments.silentMode = True
         elif arg == '-h':
-            print('\nUsage: python . [-h] [-n] [-sq] [-ss] [[file_name_1] [file_name_2] ...]')
+            print('\nUsage: python . [-h] [-n] [-sq] [-ss] [-z] [[file_name_1] [file_name_2] ...]')
             print('-h: Help and usage.')
             print('-p: Activates the automatic popup for submission.')
             print('-sq: Uses temporary sample question.')
             print('-ss Uses temporary sample solution.')
+            print('-z Silent Mode.')
             print('file_name_n: File name to find a solution (by default, runs all files in QUESTION_FOLDER).')
             exit(0)
         else:
