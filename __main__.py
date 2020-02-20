@@ -25,7 +25,7 @@ def main():
 
     print("\nLoad Questions:")
     if arguments.usesQuestionSample:
-        questions = loadQuestions(loadQuestionSamples())
+        questions = loadQuestionSamples()
     else:
         questions = loadQuestions(arguments.files)
 
