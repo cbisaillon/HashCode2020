@@ -50,18 +50,17 @@ class Question:
         return "Question (%s) -> Day to Scan: %d, Books: %s, Libraries: %s" % (self.file_name, self.days_to_scan, [str(x) for x in self.books], [str(x) for x in self.libraries])
 
 class Solution:
-    def __init__(self, file_name: str):
+    def __init__(self, file_name: str, libraries: [Library] = [], books_from_libary: [Book] = []):
         self.file_name = file_name
-        warnings.warn("TODO SOLUTION CLASS")
+        self.library_books = list(zip(libraries, books_from_libary))
     
     def __str__(self):
-        return "Solution: %s" % (self.file_name)
+        return "Solution (%s) -> %s" % (self.file_name, ['%s TAKES %s' % (str(lib), str([str(x) for x in books])) for (lib, books) in self.library_books])
 
 class Score:
     def __init__(self, val: float, solution: Solution):
         self.val = val
         self.file_name = solution.file_name
-        warnings.warn("TODO SCORE CLASS")
     
     def __str__(self):
         return "Score for %s is %f." % (self.file_name, self.val)
