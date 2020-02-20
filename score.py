@@ -1,18 +1,18 @@
 # Score - Calculates Score
 
 from utils.constants import SOLUTION_FORMAT
-from classes import Score, Solution
+from classes import Score, Solution, Library
 from glob import glob
 import warnings
 
 def getScore(solution: Solution) -> Score:
-    warnings.warn("TODO GET SCORE")
-
     books_seen = set()
-    for lib, books in solution.library_books:
-        
+    score = 0
 
-    return Score(0, solution)
+    for _, books in solution.library_books:
+        score += sum([x.score for x in books])
+
+    return Score(score, solution)
 
 def getScores(solutions: [Solution]) -> [Score]:
     scores = []
@@ -21,3 +21,11 @@ def getScores(solutions: [Solution]) -> [Score]:
         scores.append(getScore(solution))
 
     return scores
+
+def getTotalScore(scores: [Score]) -> [int]:
+    total = 0
+
+    for score in scores:
+        total += score.val
+    
+    return total
