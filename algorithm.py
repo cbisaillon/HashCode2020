@@ -16,8 +16,6 @@ def solve(question: Question) -> Solution:
     libraries.sort()
     totalDays = 0
 
-    scipy.optimize.leastsq()
-
     librariesOut = []
     booksOut = []
 

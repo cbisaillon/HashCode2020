@@ -17,11 +17,11 @@ MAX_SCORE = 50000000
 
 @total_ordering
 class Library:
-    def __init__(self, id: int, book_per_day: int, signup_time: int,  books: [Book]):
+    def __init__(self, id: int, book_per_day: int, signup_time: int,  books: [Book], parameters):
         self.id = id
         self.books_per_day = book_per_day
         self.signup_time = signup_time
-        self.score_tuple = (2, 2, 1) # Params to optimize
+        self.parameters = parameters
         self.books = books
 
     def sumOfAllBooks(self):
@@ -32,7 +32,7 @@ class Library:
         return total
 
     def getScore(self):
-        (a,b,c) = self.score_tuple
+        (a,b,c) = self.parameters
 
         return (a * self.books_per_day + b * self.sumOfAllBooks()) / c * self.signup_time
 
@@ -49,11 +49,11 @@ class Library:
         return "Library -> Id: %d, Per Day: %d, Singup: %d, Books %s" % (self.id, self.books_per_day, self.signup_time, [str(x) for x in self.books])
 
 class Question:
-    def __init__(self, file_name: str = '', days_to_scan: int = 0, book_scores: [int] = [], libraries =[]):
+    def __init__(self, file_name: str = '', days_to_scan: int = 0, book_scores: [int] = [], libraries =[], parameters = []):
         self.file_name = file_name
         self.days_to_scan = days_to_scan
         self.books = [Book(id=i, score=x) for i, x in enumerate(book_scores)]
-        self.libraries = [Library(id=k, book_per_day=books_per_day, signup_time=signup_time, books=[self.books[i] for i in book_ids]) for (k, (books_per_day, signup_time, book_ids)) in enumerate(libraries)]
+        self.libraries = [Library(id=k, book_per_day=books_per_day, parameters=parameters, signup_time=signup_time, books=[self.books[i] for i in book_ids]) for (k, (books_per_day, signup_time, book_ids)) in enumerate(libraries)]
 
     def __str__(self):
         return "Question (%s) -> Day to Scan: %d, Books: %s, Libraries: %s" % (self.file_name, self.days_to_scan, [str(x) for x in self.books], [str(x) for x in self.libraries])

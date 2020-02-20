@@ -12,7 +12,17 @@ import subprocess
 from sample import loadQuestionSamples, loadSolutionSamples
 from datetime import datetime
 
-def main():
+from scipy import optimize
+
+def getOptimizeScore(x, *args) -> float:
+    print(args)
+    return main(x)
+
+def callback(xk, state) -> bool:
+    print(state)
+    return True
+
+def main(parameters) -> float:
     start = datetime.now()
 
     print("Hash Code 2020")
@@ -27,7 +37,7 @@ def main():
     if arguments.usesQuestionSample:
         questions = loadQuestionSamples()
     else:
-        questions = loadQuestions(arguments.files)
+        questions = loadQuestions(arguments.files, parameters)
 
     if not arguments.silentMode:
         for question in questions:
@@ -64,6 +74,11 @@ def main():
         print("\nActivated Popup!")
         webbrowser.open(url=SUBMISSION_URL)
         subprocess.call('explorer "%s"' % os.path.join(os.path.dirname(os.path.realpath(__file__)), SOLUTION_FOLDER[2:-1]), shell=True)
-        
+
+    return totalScore
+
 if __name__ == '__main__':
-    main()
+    b = (0.000001, 10.0)
+    bnds = (b, b, b)
+
+    print(optimize.minimize(fun=getOptimizeScore, x0=[1.0, 1.0, 1.0], method="SLSQP", tol=10000, bounds = bnds, callback=callback))
