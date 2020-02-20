@@ -3,7 +3,7 @@
 from utils.pack import packSolution
 from parse import loadQuestions, saveSolutions, handleArgv
 from algorithm import solveAll
-#from score import getScores
+from score import getScores, getTotalScore
 import os
 from utils.constants import SOLUTION_FOLDER
 from utils.secret import SUBMISSION_URL
@@ -47,15 +47,14 @@ def main():
     saveSolutions(solutions)
 
     print("\nEvaluate Solutions:")
-    #scores: [Score] = getScores(solutions)
+    scores: [Score] = getScores(solutions)
 
-    #totalScore = 0
+    for score in scores:
+        print(score)
 
-    #for score in scores:
-    #    print(score)
-    #    totalScore += score.val
+    totalScore = getTotalScore(scores)
 
-    #print("Total Score: %f" % totalScore)
+    print("Total Score: %d" % totalScore)
     print("Execution Time: %s" % (datetime.now() - start))
 
     print("\nPack Source:")

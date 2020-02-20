@@ -12,12 +12,16 @@ class Book:
     def __str__(self):
         return "Book %d Score %d" % (self.id, self.score)
 
+
+MAX_SCORE = 50000000
+
 @total_ordering
 class Library:
     def __init__(self, id: int, book_per_day: int, signup_time: int,  books: [Book]):
         self.id = id
         self.books_per_day = book_per_day
         self.signup_time = signup_time
+        self.score_tuple = (2, 2, 1) # Params to optimize
         self.books = books
 
     def sumOfAllBooks(self):
@@ -28,8 +32,13 @@ class Library:
         return total
 
     def getScore(self):
-        return (self.books_per_day + self.sumOfAllBooks()) / self.signup_time
+        (a,b,c) = self.score_tuple
 
+        return (a * self.books_per_day + b * self.sumOfAllBooks()) / c * self.signup_time
+
+    def getError(self):
+        return MAX_SCORE - self.getScore()
+        
     def __eq__(self, other):
         return self.getScore() == other.getScore()
 
@@ -63,7 +72,7 @@ class Score:
         self.file_name = solution.file_name
     
     def __str__(self):
-        return "Score for %s is %f." % (self.file_name, self.val)
+        return "Score for %s is %d." % (self.file_name, self.val)
 
 class Arguments:
     def __init__(self):
