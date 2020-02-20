@@ -29,8 +29,9 @@ def main():
     else:
         questions = loadQuestions(arguments.files)
 
-    for question in questions:
-        print(question)
+    if not arguments.silentMode:
+        for question in questions:
+            print(question)
 
     print("\nSolve Questions:")
     if arguments.usesSolutionSample:
@@ -38,8 +39,9 @@ def main():
     else:
         solutions = solveAll(questions)
 
-    for solution in solutions:
-        print(solution)
+    if not arguments.silentMode:
+        for solution in solutions:
+            print(solution)
 
     print("\nSave Solutions:")
     saveSolutions(solutions)
