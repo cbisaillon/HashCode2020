@@ -27,7 +27,17 @@ def loadQuestions(file_names: [str] = []) -> [Question]:
 # Save Question
 
 def saveSolution(solution: Solution):
-    warnings.warn("TODO SAVE SOLUTION: %s" % solution)
+    file = open('solution/' + solution.file_name + '.solve', 'w')
+    nbLibraries = len(solution.library_books)
+
+    file.write("{}\n".format(nbLibraries))
+
+    for lib,books in solution.library_books:
+        file.write("{} {}\n".format(lib.id, len(books)))
+        file.write("{}\n".format(' '.join([str(x.id) for x in books])))
+
+    file.close()
+
 
 def saveSolutions(solutions: [Solution]):
     for solution in solutions:
