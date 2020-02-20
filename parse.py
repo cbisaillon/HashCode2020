@@ -2,15 +2,24 @@
 
 from utils.constants import QUESTION_FOLDER, SOLUTION_FOLDER
 from glob import glob
-from classes import Question, Solution, Arguments
+from classes import Question, Solution, Arguments, Library, Book
 import sys
 import warnings
 
 # Load Question
 
 def loadQuestion(file_name: str) -> Question:
-    warnings.warn("TODO LOAD QUESTION: %s" % file_name)
-    return Question(file_name=file_name)
+    with open(file_name, 'r') as h:
+        (num_books, num_libraries, scan_day) = [int(x) for x in h.readline().split(' ')]
+        books = [int(x) for x in h.readline().split(' ')]
+        libraries = []
+
+        for _ in range(num_libraries):
+            (num_book_lib, signup, ship_rate) = [int(x) for x in h.readline().split(' ')]
+            lib_books = [int(x) for x in h.readline().split(' ')]
+            libraries.append((ship_rate, signup, lib_books))
+
+    return Question(file_name=file_name, days_to_scan=scan_day, book_scores=books, libraries=libraries)
 
 def loadQuestions(file_names: [str] = []) -> [Question]:
     questions = []
@@ -27,7 +36,7 @@ def loadQuestions(file_names: [str] = []) -> [Question]:
 # Save Question
 
 def saveSolution(solution: Solution):
-    file = open('solution/' + solution.file_name + '.solve', 'w')
+    file = open(SOLUTION_FOLDER + solution.file_name.split('/')[-1] + '.solve', 'w')
     nbLibraries = len(solution.library_books)
 
     file.write("{}\n".format(nbLibraries))
