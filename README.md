@@ -8,7 +8,7 @@ To get the code running, make a `hashcode2020` virtual python environment. Do `c
 
 ## Usage
 
-Use the `hashcode2020` virtual environment. The default setting 
+Use the `hashcode2020` virtual environment. To run with default settings, simply run `python .`. For more information, run `python . -h`.
 
 ## Solution
 
