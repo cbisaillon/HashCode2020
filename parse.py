@@ -68,11 +68,12 @@ def handleArgv() -> Arguments:
         elif arg == '-z':
             arguments.silentMode = True
         elif arg == '-h':
-            print('\nUsage: python . [-h] [-n] [-sq] [-ss] [[file_name_1] [file_name_2] ...]')
+            print('\nUsage: python . [-h] [-n] [-sq] [-ss] [-z] [[file_name_1] [file_name_2] ...]')
             print('-h: Help and usage.')
             print('-p: Activates the automatic popup for submission.')
             print('-sq: Uses temporary sample question.')
             print('-ss Uses temporary sample solution.')
+            print('-z Silent Mode.')
             print('file_name_n: File name to find a solution (by default, runs all files in QUESTION_FOLDER).')
             exit(0)
         else:
