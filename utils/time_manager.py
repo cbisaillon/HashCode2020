@@ -43,12 +43,12 @@ while True:
 
         for (duration, event) in SCHEDULE:
 
-            if not new_event and current_minute == rolling_sum:
-                new_event = True
-                for _ in range(5):
-                    winsound.Beep(2000, 200)
-            elif current_minute == rolling_sum + duration:
-                new_event = False
+            #if not new_event and current_minute == rolling_sum:
+                #new_event = True
+                #for _ in range(5):
+                    #winsound.Beep(2000, 200)
+            #elif current_minute == rolling_sum + duration:
+                #new_event = False
 
             print("%s [%s]" % (event, ''.join(['*'] * ((current_minute - rolling_sum) if current_minute < rolling_sum + duration else duration) + ['.'] * ((rolling_sum + duration - current_minute) if current_minute > rolling_sum else duration))))
 
