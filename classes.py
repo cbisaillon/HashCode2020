@@ -1,6 +1,8 @@
 # Classes - Structures used in Competition
 
 import warnings
+from functools import total_ordering
+
 
 class Book:
     def __init__(self, id: int, score: int):
@@ -10,12 +12,29 @@ class Book:
     def __str__(self):
         return "Book %d Score %d" % (self.id, self.score)
 
+@total_ordering
 class Library:
     def __init__(self, id: int, book_per_day: int, signup_time: int,  books: [Book]):
         self.id = id
         self.books_per_day = book_per_day
         self.signup_time = signup_time
         self.books = books
+
+    def sumOfAllBooks(self):
+        total = 0
+        for book in self.books:
+            total += book.score
+
+        return total
+
+    def getScore(self):
+        return (self.books_per_day + self.sumOfAllBooks()) / self.signup_time
+
+    def __eq__(self, other):
+        return self.getScore() == other.getScore()
+
+    def __lt__(self, other):
+        return self.getScore() > other.getScore()
 
     def __str__(self):
         return "Library -> Id: %d, Per Day: %d, Singup: %d, Books %s" % (self.id, self.books_per_day, self.signup_time, [str(x) for x in self.books])
