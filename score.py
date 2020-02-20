@@ -7,6 +7,11 @@ import warnings
 
 def getScore(solution: Solution) -> Score:
     warnings.warn("TODO GET SCORE")
+
+    books_seen = set()
+    for lib, books in solution.library_books:
+        
+
     return Score(0, solution)
 
 def getScores(solutions: [Solution]) -> [Score]:
