@@ -1,6 +1,7 @@
 # Algorithm - Solve questions
 
 import warnings
+from data_structures import *
 
 from classes import Question, Solution
 
