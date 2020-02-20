@@ -19,7 +19,7 @@ def solve(question: Question) -> Solution:
 
     # signup all the libraries
     for index, library in enumerate(libraries):
-        totalDaysShip = library.signup_time
+        totalDaysShip = library.signup_time + totalDays
         librariesOut.append(library)
         booksOut.append([])
         for book in library.books:
