@@ -15,7 +15,7 @@ from datetime import datetime
 from scipy import optimize
 
 def getOptimizeScore(x, *args) -> float:
-    print(args)
+    print(x)
     return main(x)
 
 def callback(xk, state) -> bool:
@@ -81,4 +81,9 @@ if __name__ == '__main__':
     b = (0.000001, 10.0)
     bnds = (b, b, b)
 
-    print(optimize.minimize(fun=getOptimizeScore, x0=[1.0, 1.0, 1.0], method="SLSQP", tol=10000, bounds = bnds, callback=callback))
+
+
+    a= optimize.minimize(fun=getOptimizeScore, x0=[0.9, 0.9, 0.9], method="SLSQP", bounds = bnds)
+
+    print(a.fun)
+    print(a.x)
